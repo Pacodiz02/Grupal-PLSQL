@@ -1,7 +1,8 @@
+-- ✒️ **Ejercicio hecho por Alejandro Montes Delgado con asistencia de Paco Diz Ureña**
+
 --Realiza los módulos de programación necesarios para garantizar que el número de
 --auxiliares de vuelo en un viaje es de al menos uno por cada 5 pasajeros que realizan
 --ese viaje.
---EJERCICIO 8
 
 CREATE OR REPLACE PACKAGE PA_TEMP_AUXILIAR
 AS
