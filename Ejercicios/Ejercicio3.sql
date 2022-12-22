@@ -1,3 +1,5 @@
+-- ✒️ **Ejercicio hecho por Alejandro Montes Delgado con asistencia de Juan Jesús Alejo Sillero**
+
 --EJERCICIO3
 
 --Añade dos columnas llamadas Distancia y Duración (en formato hh:mi) a la tabla
@@ -79,4 +81,3 @@ INSERT INTO VUELOS VALUES (
     782,
     TO_DATE('01:30','HH24:MI')
 );
--- HECHO POR ALEJANDRO MONTES DELGADO
