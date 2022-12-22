@@ -1,3 +1,5 @@
+-- ✒️ **Ejercicio hecho por Alejandro Montes Delgado con asistencia de Juan Jesús Alejo Sillero**
+
 --Realiza los módulos de programación necesarios para garantizar que una misma
 --compañía no tiene más de dos vuelos con el mismo origen y destino en un mismo día
 --de la semana.
