@@ -35,11 +35,9 @@ mostrará la siguiente información:
     
     Porcentaje Ocupación Asientos: nn,n%     Total Peso Equipajes: n,nnn
 
-
 Informe Tipo 2: El segundo parámetro será el número de serie de una aeronave y el tercero
 una fecha. Se mostrará información de todos los vuelos realizados por esa aeronave en el
 mes correspondiente a la fecha recibida como parámetro con el siguiente formato:
-
 
     Aeronave: NumSerieAeronave  FechaFabricación  FechaÚltimaRevisión
 
@@ -57,8 +55,7 @@ mes correspondiente a la fecha recibida como parámetro con el siguiente formato
       …
   
     Porcentaje Medio Ocupación Aeronave xxxxxxxx: nn,n%    Total Peso Equipajes Aeronave xxxxxxx: nnn,nnn
-    
-    
+
 Informe Tipo 3: El segundo parámetro será el nombre de un módelo de avión y el tercero una
 fecha.Se mostrará información de todos los vuelos realizados por las aeronaves de ese
 modelo en el mes correspondiente a la fecha recibida como parámetro con el siguiente
@@ -82,8 +79,7 @@ formato:
       Aeronave: NumSerieAeronave    FechaFabricación    FechaÚltimaRevisión
       …
     Número Total de Pasajeros Transportados: n,nnn,nnn
-    
-    
+
 3. Añade dos columnas llamadas Distancia y Duración (en formato hh:mi) a la tabla
 Vuelos y rellénalas adecuadamente. Realiza un trigger que garantice que un avión
 asignado a un viaje tenga una autonomía superior al menos en un 25% a la distancia
