@@ -1,7 +1,5 @@
 -- ✒️ **Ejercicio hecho por Alejandro Montes Delgado con asistencia de Juan Jesús Alejo Sillero**
 
---EJERCICIO3
-
 --Añade dos columnas llamadas Distancia y Duración (en formato hh:mi) a la tabla
 --Vuelos y rellénalas adecuadamente. Realiza un trigger que garantice que un avión
 --asignado a un viaje tenga una autonomía superior al menos en un 25% a la distancia
