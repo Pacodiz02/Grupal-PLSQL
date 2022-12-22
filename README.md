@@ -1,10 +1,22 @@
 ## Enunciado Práctica PLSQL Grupal
 
+- [x] Script de creación de la base de datos en Oracle
+- [x] Script de creación de la base de datos en Postgre
+- [x] Ejercicio 1
+- [ ] Ejercicio 2
+- [x] Ejercicio 3
+- [ ] Ejercicio 4
+- [x] Ejercicio 5
+- [ ] Ejercicio 6
+- [x] Ejercicio 7
+- [x] Ejercicio 8
+- [ ] Ejercicio x en Postgre
+- [ ] Ejercicio x en Postgre
+
 1. Realiza una función que reciba como parámetros el Número de Pasaporte de un miembro del
 Personal y una fecha y devuelva el código del vuelo en el que estaba trabajando en dicha
 fecha. Debes controlar las siguientes excepciones: Empleado Inexistente, Fecha sin viajes,
 Empleado sin vuelo asignado.
-
 
 2. Realiza un procedimiento que nos proporcione diferentes listados acerca de los viajes
 realizados gestionando las excepciones que consideres oportunas. El primer parámetro
@@ -77,28 +89,22 @@ Vuelos y rellénalas adecuadamente. Realiza un trigger que garantice que un avi�
 asignado a un viaje tenga una autonomía superior al menos en un 25% a la distancia
 a recorrer.
 
-
 4. Añade una columna eMail a la tabla Auxiliares. Realiza un trigger que envíe un correo
 electrónico informativo a los auxiliares de vuelo cada vez que se les asigna un viaje,
 informándoles de la ciudad de origen, la fecha, el código de vuelo y los nombres de
 piloto y copiloto.
 
-
 5. Rellena las columnas HorasdeVuelo de la tabla Aeronaves mediante un procedimiento
 con los datos existentes en las tablas Vuelos y Viajes. Realiza un trigger que la
 mantenga actualizada automáticamente ante cualquier cambio en la base de datos.
 
-
 6. Realiza los módulos de programación necesarios para garantizar que un piloto no
 realiza más de seis vuelos de 10 horas o más a lo largo de un mes natural.
-
 
 7. Realiza los módulos de programación necesarios para garantizar que una misma
 compañía no tiene más de dos vuelos con el mismo origen y destino en un mismo día
 de la semana.
 
-
 8. Realiza los módulos de programación necesarios para garantizar que el número de
 auxiliares de vuelo en un viaje es de al menos uno por cada 5 pasajeros que realizan
 ese viaje.
-
