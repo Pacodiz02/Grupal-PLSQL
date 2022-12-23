@@ -102,7 +102,7 @@ El trigger no funciona bien, ya que al eliminar un vuelo no lo detecta y si se v
 
 Vamos a ingresar pasajeros hasta que salte la excepción. No dejo los inserts aquí ya que el código sería muy largo, todos los inserts se encuentran en el archivo del ejercicio 8. Dejo aquí el resultado de hacer todos los inserts.
 
-![BD-AMD.7.png](img/BD-AMD.7.png)
+![BD-AMD.7.png](/img/BD-AMD.7.png)
 
 
 He tenido problemas con la tabla temporal, para que se rellene tenemos que actualizar la tabla auxiliares de viaje para que se rellene
@@ -143,4 +143,4 @@ Este es el insert el cual hace que se dispare el trigger.
  );
 ```
 
-![BD-AMD.8.png](img/BD-AMD.8.png)
+![BD-AMD.8.png](/img/BD-AMD.8.png)
