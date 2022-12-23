@@ -10,7 +10,7 @@
 - [ ] Ejercicio 6
 - [x] Ejercicio 7
 - [x] Ejercicio 8
-- [ ] Ejercicio x en Postgre
+- [x] Ejercicio 3 en Postgre
 - [ ] Ejercicio x en Postgre
 
 1. Realiza una función que reciba como parámetros el Número de Pasaporte de un miembro del
