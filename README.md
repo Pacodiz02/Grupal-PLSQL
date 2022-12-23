@@ -5,7 +5,7 @@
 - [x] Ejercicio 1
 - [ ] Ejercicio 2
 - [x] Ejercicio 3
-- [ ] Ejercicio 4
+- [x] Ejercicio 4
 - [x] Ejercicio 5
 - [ ] Ejercicio 6
 - [x] Ejercicio 7
