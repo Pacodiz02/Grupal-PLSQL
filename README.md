@@ -3,7 +3,7 @@
 - [x] Script de creación de la base de datos en Oracle
 - [x] Script de creación de la base de datos en Postgre
 - [x] Ejercicio 1
-- [ ] Ejercicio 2
+- [x] Ejercicio 2
 - [x] Ejercicio 3
 - [x] Ejercicio 4
 - [x] Ejercicio 5
@@ -12,6 +12,8 @@
 - [x] Ejercicio 8
 - [x] Ejercicio 3 en Postgre
 - [ ] Ejercicio x en Postgre
+
+----------------------------
 
 1. Realiza una función que reciba como parámetros el Número de Pasaporte de un miembro del
 Personal y una fecha y devuelva el código del vuelo en el que estaba trabajando en dicha
