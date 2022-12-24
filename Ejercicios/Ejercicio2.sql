@@ -75,6 +75,16 @@ END;
 /
 
 
+--- Procedimiento para listar FECHA-HORA-CODVUELO-AEORIGEN-AEDESTINO
+
+CREATE OR REPLACE PROCEDURE listar_cabecera (p_cod_vuelo VIAJES.CODVUELO%TYPE, p_fecha VIAJES.FECHA%TYPE)
+IS
+BEGIN
+    dbms_output.put_line(chr(10)||'Fecha: '||p_fecha||chr(9)||chr(9)||'Hora: '||devolver_hora(p_cod_vuelo)||chr(10)||chr(10)||'Codigo de Vuelo: '||p_cod_vuelo||chr(9)||devolver_nom_aeropuerto_origen(p_cod_vuelo)||'-'||devolver_nom_aeropuerto_destino(p_cod_vuelo)||chr(10));
+END;
+/
+
+
 -- PASAJEROS        NUMBULTOS  PESOEQUIPAJE --
 
 --- Función para devolver NOMBRE PASAJERO
@@ -103,7 +113,7 @@ IS
     WHERE CODVUELO=p_cod_vuelo AND FECHA=p_fecha;
 BEGIN
     FOR i in c_listar_pasajeros LOOP
-    dbms_output.put_line(devolver_nombre_pasajero(i.NUMPASAPORTE)||'  '||chr(9)||chr(9)||i.NUMBULTOS||chr(9)||i.PESOEQUIPAJE);
+    dbms_output.put_line(devolver_nombre_pasajero(i.NUMPASAPORTE)||chr(9)||chr(9)||i.NUMBULTOS||chr(9)||chr(9)||chr(9)||chr(9)||i.PESOEQUIPAJE||'kg');
     END LOOP;
 END;
 /
@@ -200,7 +210,7 @@ END;
 CREATE OR REPLACE PROCEDURE informe1 (p_cod_vuelo VIAJES.CODVUELO%TYPE, p_fecha VIAJES.FECHA%TYPE)
 IS
 BEGIN
-    dbms_output.put_line(chr(10)||'Fecha: '||p_fecha||chr(9)||chr(9)||'Hora: '||devolver_hora(p_cod_vuelo)||chr(10)||chr(10)||'Codigo de Vuelo: '||p_cod_vuelo||chr(9)||devolver_nom_aeropuerto_origen(p_cod_vuelo)||'-'||devolver_nom_aeropuerto_destino(p_cod_vuelo)||chr(10));
+    listar_cabecera(p_cod_vuelo,p_fecha);
     listar_pasajeros(p_cod_vuelo,p_fecha);
     listar_porcentaje_TotalPeso(p_cod_vuelo,p_fecha);
 END;
@@ -211,6 +221,8 @@ END;
 exec informe1('IB-3949',TO_DATE('26/09/2016', 'DD/MM/YYYY'));
 
 
+
+-------------------------------------------------------------------------
 -------------------------------------------------------------------------
 
 -- Informe Tipo 2: El segundo parámetro será el número de serie de una aeronave y el tercero una fecha. Se mostrará información de todos los vuelos realizados por esa aeronave en el mes correspondiente a la fecha recibida como parámetro con el siguiente formato:
@@ -234,6 +246,8 @@ exec informe1('IB-3949',TO_DATE('26/09/2016', 'DD/MM/YYYY'));
 
 
 -------------------------------------------------------------------------------------------
+
+SET SERVEROUTPUT ON;
 
 -- Aeronave: NUMSERIEAERONAVE        FechaFabricación        FechaÚltimaRevisión --
 
@@ -263,19 +277,14 @@ IS
     WHERE NUMSERIEAERONAVE=p_numserie AND FECHA=p_fecha;
 BEGIN
     FOR i IN c_listar_vuelos LOOP
-        dbms_output.put_line('Codigo de Vuelo: '||i.CODVUELO||chr(9)||devolver_nom_aeropuerto_origen(i.CODVUELO)||'-'||devolver_nom_aeropuerto_destino(i.CODVUELO)||chr(10));
+        dbms_output.put_line(chr(10)||'Codigo de Vuelo: '||i.CODVUELO||chr(9)||devolver_nom_aeropuerto_origen(i.CODVUELO)||'-'||devolver_nom_aeropuerto_destino(i.CODVUELO)||chr(10));
         listar_pasajeros(i.CODVUELO,p_fecha);
         listar_porcentaje_TotalPeso(i.CODVUELO,p_fecha);
     END LOOP;
 END;
 /
 
-SELECT CODVUELO
-FROM VIAJES
-WHERE FECHA=TO_DATE('26/09/2016', 'DD/MM/YYYY') AND NUMSERIEAERONAVE='F-GHQC';
-exec informe2('F-GHQC',TO_DATE('26/09/2016', 'DD/MM/YYYY'));
 
-------------------------------------------------------------------------------------
 
 -- Porcentaje Medio Ocupación Aeronave              Total Peso Equipajes Aeronave --
 
@@ -327,10 +336,6 @@ BEGIN
 END;
 /
 
-SELECT devolver_PMedioOcupacion('F-GHQC',TO_DATE('26/09/2016', 'DD/MM/YYYY')) FROM DUAL;
-SELECT devolver_PMedioOcupacion('F-GHQC',TO_DATE('17/10/2016', 'DD/MM/YYYY')) FROM DUAL;
-
-
 
 --- Función que DEVUELVE el TOTAL PESO EQUIPAJES AERONAVE
 
@@ -352,13 +357,13 @@ BEGIN
 END;
 /
 
-SELECT devolver_TotalEquipajes('F-GHQC',TO_DATE('26/09/2016', 'DD/MM/YYYY')) FROM DUAL;
 
+--- Procedimiento para listar Porcentaje Medio y Peso de una Aeronave
 
 CREATE OR REPLACE PROCEDURE listar_PMedio_TPesoAeronave (p_numserie AERONAVES.NUMSERIE%TYPE,p_fecha VIAJES.FECHA%TYPE)
 IS
 BEGIN
-    dbms_output.put_line('Porcentaje Medio Ocupación Aeronave '||p_numserie||' : '||devolver_PMedioOcupacion(p_numserie,p_fecha)||'%'||chr(9)||chr(9)||'Total Peso Equipajes Aeronave '||p_numserie||' : '||devolver_TotalEquipajes(p_numserie,p_fecha)||'kg');
+    dbms_output.put_line('Porcentaje Medio Ocupación Aeronave '||p_numserie||' : '||devolver_PMedioOcupacion(p_numserie,p_fecha)||'%'||chr(9)||chr(9)||'Total Peso Equipajes Aeronave '||p_numserie||' : '||devolver_TotalEquipajes(p_numserie,p_fecha)||'kg'||chr(10));
 END;
 /
 
@@ -412,5 +417,233 @@ INSERT INTO PASAJEROSEMBARCADOS VALUES (
 exec informe2('F-GHQC',TO_DATE('26/09/2016', 'DD/MM/YYYY'));
 
 
+
 -------------------------------------------------------------------------
+-------------------------------------------------------------------------
+
+--Informe Tipo 3: El segundo parámetro será el nombre de un módelo de avión y el tercero una fecha.Se mostrará información de todos los vuelos realizados por las aeronaves de ese modelo en el mes correspondiente a la fecha recibida como parámetro con el siguiente formato:
+
+--    Modelo: xxxxxxxxxxxx   Compañía Constructora: xxxxxxxxxxx  Capacidad: nnn pasajeros.
+--      Aeronave: NumSerieAeronave  FechaFabricación  FechaÚltimaRevisión
+--      Mes: xxxxxxxxxx
+--        Código de Vuelo1: xxxxxxxxx  AeropuertoOrigen-AeropuertoDestino
+--        
+--        NombrePasajero1              NúmeroBultos1 PesoEquipaje1
+--        …
+--        NombrePasajeroN              NúmeroBultosN PesoEquipajeN
+-- 
+--        Porcentaje Ocupación Asientos: nn,n%  Total Peso Equipajes1: n,nnn
+--        Código de Vuelo2: xxxxxxxxx       AeropuertoOrigen-AeropuertoDestino
+--        …
+--        
+--      Porcentaje Medio Ocupación Aeronave xxxxxxxx: nn,n% Total Peso Equipajes Aeronave xxxxxxx: nnn,nnn
+--        
+--      Aeronave: NumSerieAeronave    FechaFabricación    FechaÚltimaRevisión
+--      …
+--    Número Total de Pasajeros Transportados: n,nnn,nnn
+
+
+-------------------------------------------------------------------------------------------
+
+SET SERVEROUTPUT ON;
+
+
+--- Función que metes un NOMBRE de un MODELO y DEVUELVE su COMPAÑIA CONSTRUCTORA
+
+CREATE OR REPLACE FUNCTION devolver_compania (p_nombre MODELOS.NOMBRE%TYPE)
+RETURN VARCHAR2
+IS
+    v_compania MODELOS.COMPANIACONSTRUCTORA%TYPE;
+BEGIN
+    SELECT COMPANIACONSTRUCTORA INTO v_compania
+    FROM MODELOS
+    WHERE NOMBRE=p_nombre;
+    RETURN v_compania;
+END;
+/
+
+
+--- Función que DEVUELVE la CAPACIDAD de un MODELO(Número de asientos)
+
+CREATE OR REPLACE FUNCTION devolver_capacidad(p_nombre MODELOS.NOMBRE%TYPE)
+RETURN NUMBER
+IS
+    v_capacidad MODELOS.NUMEROASIENTOS%TYPE;
+BEGIN
+    SELECT NUMEROASIENTOS INTO v_capacidad
+    FROM MODELOS
+    WHERE NOMBRE=p_nombre;
+    RETURN v_capacidad;
+END;
+/
+
+
+--- Procedimiento para listar aeronaves
+
+CREATE OR REPLACE PROCEDURE listar_info_mod(p_nombre MODELOS.NOMBRE%TYPE)
+IS
+BEGIN
+    dbms_output.put_line(chr(10)||'Modelo: '||p_nombre||chr(9)||chr(9)||'Compañía Constructora: '||devolver_compania(p_nombre)||chr(9)||chr(9)||'Capacidad: '||devolver_capacidad(p_nombre)||chr(10));
+END;
+/
+
+
+--- Procedimiento para listar aeronaves de un modelo
+
+CREATE OR REPLACE PROCEDURE listar_aeronave_modelo (p_nombre MODELOS.NOMBRE%TYPE, p_fecha VIAJES.FECHA%TYPE)
+IS
+    CURSOR c_listar_aeronave_m IS
+    SELECT DISTINCT NUMSERIEAERONAVE
+    FROM VIAJES
+    WHERE FECHA=p_fecha AND NUMSERIEAERONAVE IN(SELECT NUMSERIE
+                                              FROM AERONAVES
+                                              WHERE NOMBREMODELO=p_nombre);
+BEGIN
+    FOR i IN c_listar_aeronave_m LOOP
+        listar_aeronave (i.NUMSERIEAERONAVE);
+        dbms_output.put_line('Mes: '||TO_CHAR(p_fecha, 'MONTH'));
+        listar_vuelos(i.NUMSERIEAERONAVE,p_fecha);
+        listar_PMedio_TPesoAeronave(i.NUMSERIEAERONAVE,p_fecha);
+    END LOOP;
+END;
+/
+
+
+--- Función que metes un NUMEROSERIE de una AERONAVE y fecha y DEVUELVE el total pasajeros embarcados
+
+CREATE OR REPLACE FUNCTION devolver_Tpasajeros_aeronave (p_numserie VIAJES.NUMSERIEAERONAVE%TYPE, p_fecha VIAJES.FECHA%TYPE)
+RETURN NUMBER
+IS
+    v_Tpasajeros_aeronave NUMBER;
+BEGIN
+    SELECT COUNT(NUMPASAPORTE) INTO v_Tpasajeros_aeronave
+    FROM PASAJEROSEMBARCADOS
+    WHERE FECHA=p_fecha AND CODVUELO IN(SELECT CODVUELO
+                                      FROM VIAJES
+                                      WHERE FECHA=p_fecha AND NUMSERIEAERONAVE=p_numserie);
+    RETURN v_Tpasajeros_aeronave;
+END;
+/
+
+
+--- Función que metes un NOMBRE de un MODELO y fecha y DEVUELVE el total pasajeros embarcados
+
+CREATE OR REPLACE FUNCTION devolver_Tpasajeros_modelo (p_nombre MODELOS.NOMBRE%TYPE, p_fecha VIAJES.FECHA%TYPE)
+RETURN NUMBER
+IS
+    v_acum NUMBER:=0;
+    v_Tpasajeros NUMBER:=0;
+    CURSOR c_dev_Tpasajeros IS
+    SELECT  DISTINCT NUMSERIEAERONAVE, FECHA
+    FROM VIAJES
+    WHERE FECHA=p_fecha AND NUMSERIEAERONAVE IN(SELECT DISTINCT NUMSERIE
+                                                FROM AERONAVES
+                                                WHERE NOMBREMODELO=p_nombre);
+BEGIN
+    FOR i IN c_dev_Tpasajeros LOOP
+        v_Tpasajeros:=devolver_Tpasajeros_aeronave(i.NUMSERIEAERONAVE,p_fecha);
+        v_acum:=v_acum+v_Tpasajeros;
+    END LOOP;
+    RETURN v_acum;
+END;
+/
+
+
+--- Procedimiento para listar Total de Pasajeros que transporta un determinado modelo.
+
+CREATE OR REPLACE PROCEDURE listar_Tpasajeros_modelo(p_nombre MODELOS.NOMBRE%TYPE, p_fecha VIAJES.FECHA%TYPE)
+IS
+BEGIN
+    dbms_output.put_line('Numero Total de Pasajeros Transportados: '||devolver_Tpasajeros_modelo(p_nombre,p_fecha));
+END;
+/
+
+
+--- Procedimiento para MOSTRAR INFORME 3
+
+CREATE OR REPLACE PROCEDURE informe3 (p_nombre MODELOS.NOMBRE%TYPE, p_fecha VIAJES.FECHA%TYPE)
+IS
+BEGIN
+    listar_info_mod(p_nombre);
+    listar_aeronave_modelo(p_nombre,p_fecha);
+    listar_Tpasajeros_modelo(p_nombre,p_fecha);
+END;
+/
+
+-- Comprobación:
+
+INSERT INTO VIAJES VALUES (
+    TO_DATE('26/09/2016', 'DD/MM/YYYY'),
+    'AF-1149',
+    'D-AIPM'
+);
+
+INSERT INTO PASAJEROSEMBARCADOS VALUES (
+    'DWQ000879',
+    'AF-1149',
+    TO_DATE('26/09/2016', 'DD/MM/YYYY'),
+    2,
+    23.05
+);
+
+INSERT INTO PASAJEROSEMBARCADOS VALUES (
+    'ERT000919',
+    'AF-1149',
+    TO_DATE('26/09/2016', 'DD/MM/YYYY'),
+    1,
+    5.55
+);
+
+INSERT INTO PASAJEROSEMBARCADOS VALUES (
+    'FHJ456123',
+    'AF-1149',
+    TO_DATE('26/09/2016', 'DD/MM/YYYY'),
+    2,
+    7.69
+);
+
+exec informe3('A320',TO_DATE('26/09/2016', 'DD/MM/YYYY'));
+
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+----------------------------------PROCEDIMIENTO-PRINCIPAL----------------------------------
+
+SET SERVEROUTPUT ON;
+
+
+--- Procedimiento que muestra los 3 tipos de informes dependiendo del segundo parámetro y la fecha que pongamos.
+
+CREATE OR REPLACE PROCEDURE mostrar_informes (p_tipo NUMBER, p_2 VARCHAR2, p_fecha DATE)
+IS
+BEGIN
+    IF p_tipo = 1 THEN
+        informe1(p_2,p_fecha);
+    ELSIF p_tipo = 2 THEN
+        informe2(p_2,p_fecha);
+    ELSIF p_tipo = 3 THEN
+        informe3(p_2,p_fecha);
+    END IF;
+END;
+/
+
+
+-- Comprobaciones mostrar_informes:
+
+-- Informe1 (Tipo_informe,CodVuelo,Fecha)
+
+exec mostrar_informes(1,'IB-3949',TO_DATE('26/09/2016', 'DD/MM/YYYY'));
+
+
+-- Informe2 (Tipo_informe,NumSerie,Fecha)
+
+exec mostrar_informes(2,'F-GHQC',TO_DATE('26/09/2016', 'DD/MM/YYYY'));
+
+
+-- Informe3 (Tipo_informe,NombreModelo,Fecha)
+
+exec mostrar_informes(3,'A320',TO_DATE('26/09/2016', 'DD/MM/YYYY'));
+
 
