@@ -1,4 +1,75 @@
-## Funcionamiento de los ejercicios
+## Prueba de funcionamiento de los ejercicios
+
+### 2. Realiza un procedimiento que nos proporcione diferentes listados acerca de los viajes
+realizados gestionando las excepciones que consideres oportunas. El primer parámetro
+determinará el tipo de informe.
+
+Informe Tipo 1: El segundo parámetro será un código de vuelo y el tercero una fecha. Se
+mostrará la siguiente información:
+
+    Fecha: dd/mm/yyyy        Hora: hh:mm
+
+    Código de Vuelo: xxxxxxxxx    AeropuertoOrigen-AeropuertoDestino
+
+      NombrePasajero1            NúmeroBultos1   PesoEquipaje1
+      …
+      NombrePasajeroN          NúmeroBultosN     PesoEquipajeN
+    
+    Porcentaje Ocupación Asientos: nn,n%     Total Peso Equipajes: n,nnn
+    
+![informe1.png](/img/informe1.png)
+
+
+Informe Tipo 2: El segundo parámetro será el número de serie de una aeronave y el tercero
+una fecha. Se mostrará información de todos los vuelos realizados por esa aeronave en el
+mes correspondiente a la fecha recibida como parámetro con el siguiente formato:
+
+    Aeronave: NumSerieAeronave  FechaFabricación  FechaÚltimaRevisión
+
+    Mes: xxxxxxxxxx
+
+      Código de Vuelo1: xxxxxxxxx  AeropuertoOrigen-AeropuertoDestino
+    
+        NombrePasajero1          NúmeroBultos1 PesoEquipaje1
+        …
+        NombrePasajeroN          NúmeroBultosN PesoEquipajeN
+
+      Porcentaje Ocupación Asientos1: nn,n%   Total Peso Equipajes1: n,nnn
+    
+      Código de Vuelo2: xxxxxxxxx          AeropuertoOrigen-AeropuertoDestino
+      …
+  
+    Porcentaje Medio Ocupación Aeronave xxxxxxxx: nn,n%    Total Peso Equipajes Aeronave xxxxxxx: nnn,nnn
+
+![informe2.png](/img/informe2.png)
+
+
+Informe Tipo 3: El segundo parámetro será el nombre de un módelo de avión y el tercero una
+fecha.Se mostrará información de todos los vuelos realizados por las aeronaves de ese
+modelo en el mes correspondiente a la fecha recibida como parámetro con el siguiente
+formato:
+
+    Modelo: xxxxxxxxxxxx   Compañía Constructora: xxxxxxxxxxx  Capacidad: nnn pasajeros.
+      Aeronave: NumSerieAeronave  FechaFabricación  FechaÚltimaRevisión
+      Mes: xxxxxxxxxx
+        Código de Vuelo1: xxxxxxxxx  AeropuertoOrigen-AeropuertoDestino
+        
+        NombrePasajero1              NúmeroBultos1 PesoEquipaje1
+        …
+        NombrePasajeroN              NúmeroBultosN PesoEquipajeN
+ 
+        Porcentaje Ocupación Asientos: nn,n%  Total Peso Equipajes1: n,nnn
+        Código de Vuelo2: xxxxxxxxx       AeropuertoOrigen-AeropuertoDestino
+        …
+        
+      Porcentaje Medio Ocupación Aeronave xxxxxxxx: nn,n% Total Peso Equipajes Aeronave xxxxxxx: nnn,nnn
+        
+      Aeronave: NumSerieAeronave    FechaFabricación    FechaÚltimaRevisión
+      …
+    Número Total de Pasajeros Transportados: n,nnn,nnn
+
+![informe3.png](/img/informe3.png)
+
 
 ### 3. Añade dos columnas llamadas Distancia y Duración (en formato hh:mi) a la tabla Vuelos y rellénalas adecuadamente. Realiza un trigger que garantice que un avión asignado a un viaje tenga una autonomía superior al menos en un 25% a la distancia a recorrer.
 
